@@ -26,12 +26,6 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "description", "duration", "genres", "actors")
 
 
-class MovieSessionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MovieSession
-        fields = ("id", "show_time", "movie", "cinema_hall")
-
-
 class MovieListSerializer(MovieSerializer):
     genres = serializers.SlugRelatedField(
         many=True,
@@ -49,6 +43,12 @@ class MovieListSerializer(MovieSerializer):
 class MovieRetrieveSerializer(MovieSerializer):
     genres = GenreSerializer(many=True)
     actors = ActorSerializer(many=True)
+
+
+class MovieSessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MovieSession
+        fields = ("id", "show_time", "movie", "cinema_hall")
 
 
 class MovieSessionListSerializer(serializers.ModelSerializer):
